@@ -1,4 +1,4 @@
-disp('IEE 33bus system')
+clear all;clc;close all;disp('IEE 33bus system')
 basemva = 100;  accuracy = 0.00001;  maxiter = 1000
 % The impedances are expressed on a 1000 MVA base.
 % In problems 9.7-9.9 the base is mistakenly stated as 100 MVA. 
@@ -76,14 +76,18 @@ linedata=[1       2       0.0575    0.0293         0    1
 gendata=[ 1     0     0.20
           10    0     0.15
           11    0     0.25];
-      lfybus                              % Forms the bus admittance matrix
-      lfnewton               % Power flow solution by Newton-Raphson method
-      busout                 % Prints the power flow solution on the screen
-      Zbus=zbuildpi(linedata, gendata, yload);%Forms Zbus including the load
-      clear n
-      for n=1:nbus
-      zthev(n)=Zbus(n,n);
-      end
-      zthev'
-      G.Rg=real(zthev')
-      G.LG=imag(zthev')/(2*pi*50)
+lfybus                              % Forms the bus admittance matrix
+lfnewton               % Power flow solution by Newton-Raphson method
+busout                 % Prints the power flow solution on the screen
+Zbus=zbuildpi(linedata, gendata, yload);%Forms Zbus including the load
+clear n
+for n=1:nbus
+zthev(n)=Zbus(n,n);
+end
+zthev'
+G.Rg=real(zthev')
+G.Lg=-imag(zthev')/(2*pi*50)
+zbusabs=abs(zthev);
+[row_max,column_max]=find(zbusabs==max(zbusabs));
+G.Rg(column_max)
+G.Lg(column_max)
