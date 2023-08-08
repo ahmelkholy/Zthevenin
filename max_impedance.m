@@ -1,5 +1,9 @@
 Main
-zbusabs=abs(zthev);
-[row_max,column_max]=find(zbusabs==max(zbusabs));
-G.Rg(column_max)
-G.Lg(column_max)
+G.Rg=grdRg;
+G.Lg=grdLg;
+zthev=G.Rg+2*pi*50*G.Lg;
+zbusabs=abs(zthev)
+[row_max,column_max]=find(zbusabs==max(zbusabs))
+G.Rg(row_max)
+G.Lg(row_max)
+2*pi*50*G.Lg(row_max)

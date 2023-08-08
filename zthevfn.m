@@ -1,4 +1,4 @@
-function [Rg xlg]=zthevfn(busdata,linedata,gendata)
+function [Rg lg]=zthevfn(busdata,linedata,gendata)
 basemva = 100;  accuracy = 0.00001;  maxiter = 1000;
 lfybus                              % Forms the bus admittance matrix
 lfnewton               % Power flow solution by Newton-Raphson method
@@ -9,4 +9,4 @@ zthev(n)=Zbus(n,n);
 end
 zthev';
 Rg=real(zthev');
-xlg=-imag(zthev')/(2*pi*50);
+lg=-imag(zthev')/(2*pi*50);
